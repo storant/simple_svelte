@@ -27,14 +27,14 @@
 	{#if user.loggedIn}
 		<h1>Hello, {data.ip}</h1>
 		<button on:click={toggle}>
-			toggle on
+			click for local
 		</button>
 	{/if}
 
 	{#if !user.loggedIn}
 		<h1>Hey 127.0.0.1</h1>
 		<button on:click={toggle}>
-			toggle off
+			click for external
 		</button>
 	{/if}
 </main>
