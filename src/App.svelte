@@ -1,30 +1,41 @@
 <script>
+	/* import jQuery from 'jquery' */
+	export let name
 	let your_ip = ""
 
 	let user = { loggedIn: false}
 
+
 	function toggle() {
 		user.loggedIn = !user.loggedIn;
-		your_ip = geoplugin_request()
-
+		your_ip = 0
 	}
+
+	import { onMount } from "svelte";
+    const apiURL = "https://api.ipify.org/?format=json";
+	let data = "";
+	
+	onMount(async function() {
+        const response = await fetch(apiURL);
+        data = await response.json();
+    });
+
 </script>
+
 
 <main>
 	{#if user.loggedIn}
-		<h1>Hello, {your_ip}</h1>
+		<h1>Hello, {data.ip}</h1>
 		<button on:click={toggle}>
-			click me
+			toggle on
 		</button>
-		
 	{/if}
 
 	{#if !user.loggedIn}
 		<h1>Hey 127.0.0.1</h1>
 		<button on:click={toggle}>
-			click me
+			toggle off
 		</button>
-		
 	{/if}
 </main>
 
